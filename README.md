@@ -14,3 +14,12 @@
   3. In this state or the next two states (`ringing, arms up`, `ringing, arms down`, or `ringing, arms_up (2nd time)`), a southbound train approaches and triggers the `sb_approach` signal.
   4. The northbound train exits the intersection and triggers the `nb_depart` signal.
   5. The southbound train exits the intersection and triggers the `sb_depart` signal. From the perspective of this FSM, an invariant has been violated - a depart signal arrived before an arrival signal - because the FSM missed the arrival signal.
+
+## Check Your Work
+### FSM #1
+![FSM 1](./images/fsm1.png "FSM1")
+  - A counterexample for this FSM occurs when it's in the `idle` state and both a northbound and a southbound train arrive at the same time (meaning `nb_approach` and `sb_approach` are present simultaneously). If this happens, the FSM will lose track of one of the trains, the arms will raise when the train it's tracking departs, and then, when the second train departs, a depart signal will arrive before an arrival signal from the perspective of the FSM since it lost track of the corresponding arrival signal.
+
+### FSM #2
+![FSM 2](./images/fsm2.png "FSM2")
+  - We we unable to find a counterexample for this FSM.
