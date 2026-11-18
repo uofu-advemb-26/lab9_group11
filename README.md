@@ -22,12 +22,12 @@
 
 ## Check Your Work
 ### FSM #1
-![FSM 1](./images/fsm1.png "FSM1")
+![FSM #1](./images/fsm1.png "FSM #1")
   - A counterexample for this FSM occurs when it's in the `idle` state and both a northbound and a southbound train arrive at the same time (meaning `nb_approach` and `sb_approach` are present simultaneously). If this happens, the FSM will lose track of one of the trains, the arms will raise when the train it's tracking departs, and then, when the second train departs, a depart signal will arrive before an arrival signal from the perspective of the FSM since it lost track of the corresponding arrival signal.
 
 ### FSM #2
-![FSM 2](./images/fsm2.png "FSM2")
-  - We we unable to find a counterexample for this FSM.
+![FSM #2](./images/fsm2.png "FSM #2")
+  - We were unable to find a counterexample for this FSM.
 
 ## Prove It
 | number | arms_down | alarm_on | northbound_present | southbound_present | *north_approach* | *south_approach* | *north_depart* | *south_depart* | *time_elapsed* | safety_hazard |
@@ -63,3 +63,7 @@
 | 22      | Timing signals are only received 10 seconds after the alarms start and 10 seconds after the arms raise |
 | 23      | The arms are only down when a train is present. |
 | 24      | The arms only lower 10 seconds after the alarms have started. |
+
+## Specification vs Implementation
+![FSM #3](./images/fsm3.png "FSM #3")
+  - This FSM is essentially equivalent to the previous FSMs in ['Check Your Work'](#check-your-work). The difference is that neither of these FSMs explicitly included the error states. Other than that, [FSM #1](#fsm-1) is identical to this FSM. [FSM #2](#fsm-2) is functionally equivalent to this FSM when input signals arrive one at a time; however, FSM #2 also includes states and transition logic to account for situations where input signals arrive at exactly the same time.
