@@ -32,22 +32,22 @@
 ## Prove It
 | number | arms_down | alarm_on | northbound_present | southbound_present | *north_approach* | *south_approach* | *north_depart* | *south_depart* | *time_elapsed* | safety_hazard |
 |--------|-----------|----------|--------------------|--------------------|------------------|------------------|----------------|----------------|----------------|---------------|
-| 0      | 0         | 0        | 0                  | 0                  | 6                | 5                | 17             | 17             | 27             |               |
+| 0      | 0         | 0        | 0                  | 0                  | 6                | 5                | 17             | 17             | 22             |               |
 | 1      | 0         | 0        | 0                  | 1                  |                  |                  |                |                |                | 17            |
 | 2      | 0         | 0        | 1                  | 0                  |                  |                  |                |                |                | 17            |
 | 3      | 0         | 0        | 1                  | 1                  |                  |                  |                |                |                | 17            |
-| 4      | 0         | 1        | 0                  | 0                  | 6                | 5                | 24             | 24             | 0              |               |
-| 5      | 0         | 1        | 0                  | 1                  | 7                | 21               | 24             | 18/19 & 16     | 13             |               |
-| 6      | 0         | 1        | 1                  | 0                  | 21               | 7                | 18/19 & 16     | 24             | 14             |               |
-| 7      | 0         | 1        | 1                  | 1                  | 21               | 21               | 18/19 & 16     | 18/19 & 16     | 15             |               |
-| 8      | 1         | 0        | 0                  | 0                  |                  |                  |                |                |                | 28 & 29       |
-| 9      | 1         | 0        | 0                  | 1                  |                  |                  |                |                |                | 17 & 29       |
-| 10     | 1         | 0        | 1                  | 0                  |                  |                  |                |                |                | 17 & 29       |
-| 11     | 1         | 0        | 1                  | 1                  |                  |                  |                |                |                | 17 & 29       |
-| 12     | 1         | 1        | 0                  | 0                  |                  |                  |                |                |                | 28            |
-| 13     | 1         | 1        | 0                  | 1                  | 15               | 21               | 24             | 4              | 27             |               |
-| 14     | 1         | 1        | 1                  | 0                  | 21               | 15               | 4              | 24             | 27             |               |
-| 15     | 1         | 1        | 1                  | 1                  | 21               | 21               | 13             | 14             | 27             |               |
+| 4      | 0         | 1        | 0                  | 0                  | 6                | 5                | 21             | 21             | 0              |               |
+| 5      | 0         | 1        | 0                  | 1                  | 7                | 20               | 21             | 18/19 & 16     | 13             |               |
+| 6      | 0         | 1        | 1                  | 0                  | 20               | 7                | 18/19 & 16     | 21             | 14             |               |
+| 7      | 0         | 1        | 1                  | 1                  | 20               | 20               | 18/19 & 16     | 18/19 & 16     | 15             |               |
+| 8      | 1         | 0        | 0                  | 0                  |                  |                  |                |                |                | 23 & 24       |
+| 9      | 1         | 0        | 0                  | 1                  |                  |                  |                |                |                | 17 & 24       |
+| 10     | 1         | 0        | 1                  | 0                  |                  |                  |                |                |                | 17 & 24       |
+| 11     | 1         | 0        | 1                  | 1                  |                  |                  |                |                |                | 17 & 24       |
+| 12     | 1         | 1        | 0                  | 0                  |                  |                  |                |                |                | 23            |
+| 13     | 1         | 1        | 0                  | 1                  | 15               | 20               | 21             | 4              | 22             |               |
+| 14     | 1         | 1        | 1                  | 0                  | 20               | 15               | 4              | 21             | 22             |               |
+| 15     | 1         | 1        | 1                  | 1                  | 20               | 20               | 13             | 14             | 22             |               |
   - **Key**
     - Italicized headers are inputs that either cause a state transition to the next state or to the invariant they cause to be violated.
     - An entry in the `safety_hazard` column means that entire state violates an invariant: the number listed is the invariant violated. In these states, the system has already failed, so it's assumed that no recovery is possible. As such, any inputs while in these states are ignored.
@@ -58,13 +58,8 @@
 | 17      | No trains are in the intersection when the alarms are off. |
 | 18      | The arriving and departing sensors are placed sufficiently far from the railroad crossing that the arms will have lowered by the time the train reaches the intersection. |
 | 19      | The train won't be moving fast enough to break the 10 second deadline between the lights flashing and the arms lowering. |
-| 20      | The departing sensor is triggered by the tail end of the train (when weight is no longer detected) rather than the front end of the train (so that long trains don't remain in in the intersection when the departing sensor is triggered). |
-| 21      | Trains are spaced with sufficient distance such that a second train on the same track won't trigger an arriving signal before the prior train has triggered the departing signal. |
-| 22      | The sensors are reliable and won't be disrupted by environmental conditions. |
-| 23      | Passersby will heed the alarms and not bypass the arms. |
-| 24      | An approach signal will always precede a depart signal. |
-| 25      | The power will never be interrupted. |
-| 26      | Trains on each track only run in one direction. |
-| 27      | Timing signals are only received 10 seconds after the alarms start and 10 seconds after the arms raise |
-| 28      | The arms are only down when a train is present. |
-| 29      | The arms only lower 10 seconds after the alarms have started. |
+| 20      | Trains are spaced with sufficient distance such that a second train on the same track won't trigger an arriving signal before the prior train has triggered the departing signal. |
+| 21      | An approach signal will always precede a depart signal. |
+| 22      | Timing signals are only received 10 seconds after the alarms start and 10 seconds after the arms raise |
+| 23      | The arms are only down when a train is present. |
+| 24      | The arms only lower 10 seconds after the alarms have started. |
